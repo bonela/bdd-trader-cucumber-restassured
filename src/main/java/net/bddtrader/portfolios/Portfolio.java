@@ -1,5 +1,8 @@
 package net.bddtrader.portfolios;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import net.bddtrader.tradingdata.PriceReader;
 import net.bddtrader.tradingdata.TradingDataAPI;
 
@@ -14,6 +17,7 @@ import static net.bddtrader.portfolios.Trade.deposit;
 /**
  * A Portfolio records the financial position of a client, as well as the history of their trades.
  */
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Portfolio {
 
     private static Long INITIAL_DEPOSIT_IN_DOLLARS = 1000L;
@@ -22,6 +26,9 @@ public class Portfolio {
     private final Long clientId;
     private final List<Trade> history;
 
+
+
+
     public Portfolio(Long portfolioId, Long clientId) {
         this.portfolioId = portfolioId;
         this.clientId = clientId;
@@ -29,7 +36,9 @@ public class Portfolio {
         placeOrder(deposit(INITIAL_DEPOSIT_IN_DOLLARS).dollars());
     }
 
-    protected Portfolio(Long portfolioId, Long clientId, List<Trade> history) {
+
+    @JsonCreator
+    public Portfolio(Long portfolioId, Long clientId, List<Trade> history) {
         this.portfolioId = portfolioId;
         this.clientId = clientId;
         this.history = new CopyOnWriteArrayList<>(history);

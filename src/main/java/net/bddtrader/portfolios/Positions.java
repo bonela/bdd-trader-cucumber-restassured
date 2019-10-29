@@ -1,13 +1,29 @@
 package net.bddtrader.portfolios;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import net.bddtrader.tradingdata.PriceReader;
 
 import java.util.HashMap;
 import java.util.Map;
 
-class Positions {
+@JsonIgnoreProperties(ignoreUnknown=true)
+public class Positions {
 
-        private final Map<String, Position> positionsBySecurity = new HashMap<>();
+
+
+
+        private Map<String, Position> positionsBySecurity = new HashMap<>();
+
+        public Positions(){
+            super();
+        }
+
+        @JsonCreator
+        public Positions(final Map<String, Position> positionsBySecurity){
+            this.positionsBySecurity = positionsBySecurity;
+        }
 
         public void apply(Trade trade) {
             if (positionsBySecurity.containsKey(trade.getSecurityCode())) {

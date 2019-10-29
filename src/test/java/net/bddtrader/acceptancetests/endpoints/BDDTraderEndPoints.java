@@ -1,5 +1,6 @@
 package net.bddtrader.acceptancetests.endpoints;
 
+
 public enum BDDTraderEndPoints {
     RegisterClient("/client"),
     ClientPortfolio("/client/{clientId}/portfolio"),

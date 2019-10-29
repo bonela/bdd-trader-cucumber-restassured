@@ -13,9 +13,9 @@ Feature: Viewing positions
       | IBM          | 60    |
 
   Scenario: Making a profit on a single share
-    Given Sarah Smith is a registered trader
-    When Sarah has purchased 5 SNAP shares at $100 each
-    Then she should have the following positions:
+    Given Lola Rubio is a registered client
+    When Lola has purchased 5 SNAP shares at $100 price
+    Then her positions should be:
       | securityCode | amount | totalValueInDollars | profit |
       | CASH         | 50000  | 500.00              | 0.00   |
       | SNAP         | 5      | 1000.00             | 500.00 |
